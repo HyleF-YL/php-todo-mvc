@@ -5,7 +5,7 @@ echo get_header( [ 'title' => 'Accueil' ] );
     <!-- Filters -->
     <aside class="block w-1/4 mt-[7.1rem]">
       <?= get_template( __PROJECT_ROOT__ . "/Views/fragments/filter-form.php", [
-        // TODO y aura sûrement un truc à faire ici 🤔
+        
       ] ); ?>
     </aside>
     <!-- /Filters -->
@@ -24,7 +24,37 @@ echo get_header( [ 'title' => 'Accueil' ] );
       <!-- /Header + Search Form -->
       
       <form method="post">
-        
+        <?php
+        $date = null;
+        $array = [];
+        $tasks = $tasks["tasks"];
+         
+          foreach($tasks as $task):
+
+            if($date == null || $date !== date("d/m/Y",strtotime($task->getCreatedAt()))){
+              
+              $date = $task->getCreatedAt();
+              $date = date("d/m/Y",strtotime($date));
+              
+              
+              echo "<h2>" . $date . "</h2>";
+            }
+            echo(get_template( __PROJECT_ROOT__ . "/Views/fragments/task-template.php",[ 'tasks' => $task,'dateAChangee' => true]));
+              
+          endforeach;
+          
+              /*else{
+                foreach($tasks as $task){
+                  if($task->getCreatedAt() == $date){
+                    $taskToEcho = $task;
+                    echo(get_template( __PROJECT_ROOT__ . "/Views/fragments/task-template.php",[ 'tasks' => $task,'dateAChangee' => false]));
+                    break;
+                  }
+                }
+              }*/
+              
+          
+        ?>
         <!-- Task -->
         <div class="bg-white hover:bg-slate-50 transition-colors duration-300 my-2 py-4 rounded flex flex-row border-2 border-slate-100 items-stretch">
           <!-- Checkbox -->

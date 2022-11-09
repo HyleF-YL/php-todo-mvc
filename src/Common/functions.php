@@ -31,7 +31,7 @@ function get_header( array $args ) : string {
   extract( $args );
   
   ob_start();
-  require __PROJECT_ROOT__ . "/views/fragments/header.php";
+  require __PROJECT_ROOT__ . "/Views/fragments/header.php";
   return ob_get_clean();
 }
 
@@ -44,7 +44,7 @@ function get_header( array $args ) : string {
  */
 function get_footer () : string {
   ob_start();
-  require __PROJECT_ROOT__ . "/views/fragments/footer.php";
+  require __PROJECT_ROOT__ . "/Views/fragments/footer.php";
   return ob_get_clean();
 }
 
@@ -59,6 +59,6 @@ function get_404 () : string {
   http_response_code(404);
   
   ob_start();
-  require __PROJECT_ROOT__ . "/views/404.php";
+  require __PROJECT_ROOT__ . "/Views/404.php";
   return ob_get_clean();
 }
